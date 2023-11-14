@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import CityList from './components/CityWeather';
+import AddCityForm from './components/AddCityForm';
 
 const cityData = [
   { name: 'New York', temperature: 82, low: 78, high: 87, humidity: '48%' },
@@ -10,8 +11,13 @@ const cityData = [
 
 function App() {
   const [cities, setCities] = useState(cityData);
+  function addNewCity(cityName) {
+    console.log(`the city to add: ${cityName}`);
+    //TODO
+  }
   return (
     <div className='App'>
+      <AddCityForm onSubmit={addNewCity} />
       <CityList cities={cities} />
     </div>
   );
