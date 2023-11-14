@@ -13,7 +13,12 @@ function App() {
   const [cities, setCities] = useState(cityData);
   function addNewCity(cityName) {
     console.log(`the city to add: ${cityName}`);
-    //TODO
+    //dummy data
+    let newCity = { name: cityName, temperature: 75, low: 70, high: 80, humidity: '50%' };
+    console.log({ newCity });
+    //add to list
+    //create new array using spread then appending new data
+    setCities([...cities, newCity]);
   }
   return (
     <div className='App'>
