@@ -22,4 +22,4 @@ const CityWeather = (props) => {
   );
 };
 
-export default CityList;
+export { CityList, CityWeather };

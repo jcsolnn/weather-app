@@ -1,7 +1,9 @@
 import './App.css';
 import { useState } from 'react';
-import CityList from './components/CityWeather';
+import { CityList } from './components/CityWeather';
 import AddCityForm from './components/AddCityForm';
+import Header from './components/Header';
+import DetailPage from './components/DetailPage';
 
 const cityData = [
   { name: 'New York', temperature: 82, low: 78, high: 87, humidity: '48%' },
@@ -22,8 +24,11 @@ function App() {
   }
   return (
     <div className='App'>
+      <Header />
       <AddCityForm onSubmit={addNewCity} />
       <CityList cities={cities} />
+      <p>Details to be route ....</p>
+      <DetailPage city={cities[1]} />
     </div>
   );
 }

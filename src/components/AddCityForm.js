@@ -6,6 +6,7 @@ export default function AddCityForm(props) {
     event.preventDefault();
     console.log(cityName);
     props.onSubmit(cityName);
+    setCityName('');
   }
   return (
     <form onSubmit={handleSubmit}>
