@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default function AddCityForm(props) {
   const [cityName, setCityName] = useState('');
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     console.log(cityName);
     props.onSubmit(cityName);
