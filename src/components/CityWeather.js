@@ -13,10 +13,10 @@ const CityWeather = (props) => {
     <>
       <h3>{city.name}</h3>
       <ul>
-        <li>Temperature: {city.temperature}</li>
-        <li>Low: {city.low}</li>
-        <li>High: {city.high}</li>
-        <li>Humdity: {city.humidity}</li>
+        <li>Temperature: {city.main.temp}</li>
+        <li>Low: {city.main.temp_min}</li>
+        <li>High: {city.main.temp_low}</li>
+        <li>Humdity: {city.main.humidity}</li>
       </ul>
     </>
   );
