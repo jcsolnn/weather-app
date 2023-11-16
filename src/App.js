@@ -26,7 +26,6 @@ function App() {
   return (
     <div className='App'>
       <Header />
-      <TestResponse />
     </div>
   );
 }
