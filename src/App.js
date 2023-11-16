@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CityList from './components/CityList';
 import AddCityForm from './components/AddCityForm';
 import Header from './components/Header';
@@ -8,14 +8,20 @@ import handleApiRequest from './utils/handleApiRequest';
 
 function App() {
   const [cityList, setCityList] = useState([]);
+  const defaultCity = 'San Francisco';
+
+  useEffect(() => {
+    const loadDefaultCity = async () => {
+      const defaultData = await handleApiRequest(defaultCity);
+      setCityList([...cityList, defaultData]);
+    };
+    loadDefaultCity();
+  }, []);
 
   async function addNewCity(cityName) {
     const newCityData = await handleApiRequest(cityName);
-    // console.log('Data returned from api: ' + JSON.stringify(newCityData));
-    //add to list:create new array using spread then appending new data
     setCityList([...cityList, newCityData]);
   }
-  //console.log('Current list of cities: ' + JSON.stringify(cityList));
 
   return (
     <div className='App'>
