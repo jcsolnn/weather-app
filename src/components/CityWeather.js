@@ -3,9 +3,14 @@ import { Card, ListGroup } from 'react-bootstrap';
 export default function CityWeather(city) {
   const IMG_URL = process.env.REACT_APP_API_ICON_URL;
   let weather_icon = IMG_URL + city.weather[0].icon + '@2x.png';
+
+  function handleClick() {
+    console.log('card clicked' + city.name);
+  }
+  //format data
   //todo: route to details
   return (
-    <Card style={{ width: '320px', borderColor: '#f4d06f' }}>
+    <Card onClick={handleClick} style={{ width: '320px', borderColor: '#f4d06f' }}>
       <Card.Body>
         <ListGroup horizontal>
           <ListGroup.Item style={{ border: 'none' }}>

@@ -13,7 +13,6 @@ function App() {
   useEffect(() => {
     const loadDefaultCity = async () => {
       const defaultData = await getCityWeather(defaultCity);
-      //todo prevent duplicates
       setCityList([...cityList, defaultData]);
     };
     loadDefaultCity();
@@ -32,7 +31,7 @@ function App() {
           {cityList.length === 0 ? <p>No details to show ...</p> : <WeatherDetails city={cityList[0]} />}
         </Col>
       </Row>
-      <Row className='py-lg-5'>
+      <Row className='py-lg-5 justify-content-center'>
         <Col>
           <CityList cities={cityList} />
         </Col>

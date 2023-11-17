@@ -5,7 +5,7 @@ export default function CityList(props) {
   return (
     <CardGroup>
       {props.cities.map((city) => (
-        <CityWeather {...city} key={city.id} />
+        <CityWeather key={city.id} {...city} />
       ))}
     </CardGroup>
   );
