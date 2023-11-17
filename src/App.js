@@ -26,14 +26,14 @@ function App() {
 
   return (
     <Container fluid>
-      <Header />
+      <Header formSubmit={addNewCity} />
       <Row className='py-lg-5' style={{ backgroundColor: '#fff8f0' }}>
         <Col className='col-lg-6 col-md-8 mx-auto'>
           {cityList.length === 0 ? <p>No details to show ...</p> : <WeatherDetails city={cityList[0]} />}
         </Col>
       </Row>
       <Row className='py-lg-5'>
-        <Col className='col-md-3'>
+        <Col>
           <CityList cities={cityList} />
         </Col>
       </Row>

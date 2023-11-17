@@ -5,7 +5,7 @@ export default function CityWeather(city) {
   let weather_icon = IMG_URL + city.weather[0].icon + '@2x.png';
   //todo: route to details
   return (
-    <Card style={{ width: '20rem', borderColor: '#f4d06f' }}>
+    <Card style={{ width: '320px', borderColor: '#f4d06f' }}>
       <Card.Body>
         <ListGroup horizontal>
           <ListGroup.Item style={{ border: 'none' }}>

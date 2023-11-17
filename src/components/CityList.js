@@ -1,12 +1,12 @@
-import { Container } from 'react-bootstrap';
+import { CardGroup, Container } from 'react-bootstrap';
 import CityWeather from './CityWeather';
 
 export default function CityList(props) {
   return (
-    <Container>
+    <CardGroup>
       {props.cities.map((city) => (
         <CityWeather {...city} key={city.id} />
       ))}
-    </Container>
+    </CardGroup>
   );
 }

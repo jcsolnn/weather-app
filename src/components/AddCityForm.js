@@ -5,7 +5,6 @@ export default function AddCityForm(props) {
   const [cityName, setCityName] = useState('');
   async function handleSubmit(event) {
     event.preventDefault();
-    //console.log(cityName);
     props.onSubmit(cityName);
     setCityName('');
   }
