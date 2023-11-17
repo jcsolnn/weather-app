@@ -8,14 +8,16 @@ import WeatherDetails from './components/WeatherDetails';
 
 function App() {
   const [cityList, setCityList] = useState([]);
-  const defaultCity = 'San Francisco';
+  const defaultCities = ['San Francisco', 'Sacramento', 'San Jose'];
 
   useEffect(() => {
-    const loadDefaultCity = async () => {
-      const defaultData = await getCityWeather(defaultCity);
-      setCityList([...cityList, defaultData]);
+    const loadDefaultCities = async () => {
+      const data1 = await getCityWeather(defaultCities[0]);
+      const data2 = await getCityWeather(defaultCities[1]);
+      const data3 = await getCityWeather(defaultCities[2]);
+      setCityList([...cityList, data1, data2, data3]);
     };
-    loadDefaultCity();
+    loadDefaultCities();
   }, []);
 
   async function addNewCity(cityName) {
@@ -23,6 +25,9 @@ function App() {
     setCityList([...cityList, newCityData]);
   }
 
+  function selectedCity(city) {
+    console.log('in app: city ' + city.name + 'was clicked');
+  }
   return (
     <Container fluid>
       <Header formSubmit={addNewCity} />
@@ -33,7 +38,7 @@ function App() {
       </Row>
       <Row className='py-lg-5 justify-content-center'>
         <Col>
-          <CityList cities={cityList} />
+          <CityList cities={cityList} onCityClick={selectedCity} />
         </Col>
       </Row>
     </Container>

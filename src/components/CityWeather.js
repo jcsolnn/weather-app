@@ -1,20 +1,23 @@
 import { Card, ListGroup } from 'react-bootstrap';
 
-export default function CityWeather(city) {
+export default function CityWeather(city, { onClick }) {
   const IMG_URL = process.env.REACT_APP_API_ICON_URL;
   let weather_icon = IMG_URL + city.weather[0].icon + '@2x.png';
 
+  const formatValue = (x) => {
+    return Number.parseFloat(x).toFixed(0);
+  };
+
   function handleClick() {
-    console.log('card clicked' + city.name);
+    console.log('in city weather: clicked ' + city.name);
+    onClick(city); //not a function
   }
-  //format data
-  //todo: route to details
   return (
     <Card onClick={handleClick} style={{ width: '320px', borderColor: '#f4d06f' }}>
       <Card.Body>
         <ListGroup horizontal>
           <ListGroup.Item style={{ border: 'none' }}>
-            <Card.Title style={{ fontSize: '2rem' }}>{city.main.temp}&deg; </Card.Title>
+            <Card.Title style={{ fontSize: '2rem' }}>{formatValue(city.main.temp)}&deg; </Card.Title>
             <Card.Subtitle>{city.name}</Card.Subtitle>
           </ListGroup.Item>
           <ListGroup.Item style={{ border: 'none' }}>
@@ -24,10 +27,11 @@ export default function CityWeather(city) {
         <Card.Text>
           <ListGroup variant='flush'>
             <ListGroup.Item>
-              {city.main.temp_min}&deg; | {city.main.temp_max}&deg; feels like {city.main.feels_like}&deg;
+              {formatValue(city.main.temp_min)}&deg; | {formatValue(city.main.temp_max)}&deg; feels like{' '}
+              {formatValue(city.main.feels_like)}&deg;
             </ListGroup.Item>
             <ListGroup.Item>
-              {city.weather[0].main} - {city.weather[0].description}
+              <b>{city.weather[0].main}</b> - {city.weather[0].description}
             </ListGroup.Item>
           </ListGroup>
         </Card.Text>
