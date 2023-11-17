@@ -1,12 +1,12 @@
+import { Container } from 'react-bootstrap';
 import CityWeather from './CityWeather';
 
 export default function CityList(props) {
   return (
-    <div>
-      <p>List of Cities: </p>
+    <Container>
       {props.cities.map((city) => (
-        <CityWeather {...city} />
+        <CityWeather {...city} key={city.id} />
       ))}
-    </div>
+    </Container>
   );
 }

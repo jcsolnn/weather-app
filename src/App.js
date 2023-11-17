@@ -1,10 +1,10 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import CityList from './components/CityList';
-import AddCityForm from './components/AddCityForm';
 import Header from './components/Header';
-import DetailPage from './components/DetailPage';
 import { getCityWeather } from './api/cityWeather';
+import { Container, Row, Col } from 'react-bootstrap';
+import WeatherDetails from './components/WeatherDetails';
 
 function App() {
   const [cityList, setCityList] = useState([]);
@@ -13,6 +13,7 @@ function App() {
   useEffect(() => {
     const loadDefaultCity = async () => {
       const defaultData = await getCityWeather(defaultCity);
+      //todo prevent duplicates
       setCityList([...cityList, defaultData]);
     };
     loadDefaultCity();
@@ -24,13 +25,19 @@ function App() {
   }
 
   return (
-    <div className='App'>
+    <Container fluid>
       <Header />
-      <AddCityForm onSubmit={addNewCity} />
-      <CityList cities={cityList} />
-      <br />
-      {cityList.length === 0 ? <p>No details to show ...</p> : <DetailPage city={cityList[0]} />}
-    </div>
+      <Row className='py-lg-5' style={{ backgroundColor: '#fff8f0' }}>
+        <Col className='col-lg-6 col-md-8 mx-auto'>
+          {cityList.length === 0 ? <p>No details to show ...</p> : <WeatherDetails city={cityList[0]} />}
+        </Col>
+      </Row>
+      <Row className='py-lg-5'>
+        <Col className='col-md-3'>
+          <CityList cities={cityList} />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

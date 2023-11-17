@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 
 export default function AddCityForm(props) {
   const [cityName, setCityName] = useState('');
@@ -9,15 +10,18 @@ export default function AddCityForm(props) {
     setCityName('');
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name='cityName'
-        type='text'
-        placeholder='Enter City'
-        value={cityName}
-        onChange={(event) => setCityName(event.target.value)}
-      />
-      <button type='submit'>+</button>
-    </form>
+    <Form className='d-flex' onSubmit={handleSubmit}>
+      <Row>
+        <Col>
+          <Form.Control
+            name='cityName'
+            type='search'
+            placeholder='Enter City'
+            defaultValue={cityName}
+            onChange={(event) => setCityName(event.target.value)}
+          />
+        </Col>
+      </Row>
+    </Form>
   );
 }
