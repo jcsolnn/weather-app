@@ -1,13 +1,14 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import CityList from './components/CityList';
 import Header from './components/Header';
 import { getCityWeather } from './api/cityWeather';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, CardGroup } from 'react-bootstrap';
 import WeatherDetails from './components/WeatherDetails';
+import CityWeather from './components/CityWeather';
 
 function App() {
   const [cityList, setCityList] = useState([]);
+  //const [selectedCity, setSelectedCity] = useState({});
   const defaultCities = ['San Francisco', 'Sacramento', 'San Jose'];
 
   useEffect(() => {
@@ -25,9 +26,11 @@ function App() {
     setCityList([...cityList, newCityData]);
   }
 
-  function selectedCity(city) {
-    console.log('in app: city ' + city.name + 'was clicked');
+  function selectCity(city) {
+    console.log('in app: ' + city + ' was clicked');
+    //setSelectedCity(...selectCity);
   }
+
   return (
     <Container fluid>
       <Header formSubmit={addNewCity} />
@@ -38,7 +41,11 @@ function App() {
       </Row>
       <Row className='py-lg-5 justify-content-center'>
         <Col>
-          <CityList cities={cityList} onCityClick={selectedCity} />
+          <CardGroup>
+            {cityList.map((city) => (
+              <CityWeather key={city.id} onClick={selectCity} {...city} />
+            ))}
+          </CardGroup>
         </Col>
       </Row>
     </Container>

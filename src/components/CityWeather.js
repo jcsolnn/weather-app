@@ -9,8 +9,8 @@ export default function CityWeather(city, { onClick }) {
   };
 
   function handleClick() {
-    console.log('in city weather: clicked ' + city.name);
-    onClick(city); //not a function
+    console.log('in city weather: clicked ' + city.name); //gtg
+    onClick(city.name); //not a func
   }
   return (
     <Card onClick={handleClick} style={{ width: '320px', borderColor: '#f4d06f' }}>

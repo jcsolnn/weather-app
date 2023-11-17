@@ -1,6 +1,7 @@
 import { Navbar, Container } from 'react-bootstrap';
 import AddCityForm from './AddCityForm';
-export default function Header(props) {
+
+export default function Header({ formSubmit }) {
   return (
     <Navbar style={{ background: '#a7dcd6' }}>
       <Container fluid>
@@ -8,7 +9,7 @@ export default function Header(props) {
           Open Weather App
         </Navbar.Brand>
         <div className='float-right'>
-          <AddCityForm onSubmit={props.formSubmit} />
+          <AddCityForm onSubmit={formSubmit} />
         </div>
       </Container>
     </Navbar>
