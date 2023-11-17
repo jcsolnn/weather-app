@@ -1,36 +1,56 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import CityList from './components/CityList';
-import AddCityForm from './components/AddCityForm';
 import Header from './components/Header';
-import DetailPage from './components/DetailPage';
 import { getCityWeather } from './api/cityWeather';
+import { Container, Row, Col, CardGroup } from 'react-bootstrap';
+import WeatherDetails from './components/WeatherDetails';
+import CityWeather from './components/CityWeather';
 
 function App() {
   const [cityList, setCityList] = useState([]);
-  const defaultCity = 'San Francisco';
+  const [selectedCity, setSelectedCity] = useState(null);
+  const defaultCities = ['San Francisco', 'Sacramento', 'San Jose'];
 
   useEffect(() => {
-    const loadDefaultCity = async () => {
-      const defaultData = await getCityWeather(defaultCity);
-      setCityList([...cityList, defaultData]);
+    const loadDefaultCities = async () => {
+      const data1 = await getCityWeather(defaultCities[0]);
+      const data2 = await getCityWeather(defaultCities[1]);
+      const data3 = await getCityWeather(defaultCities[2]);
+      const cityListArr = [data1, data2, data3]
+      setCityList(cityListArr);
     };
-    loadDefaultCity();
+    loadDefaultCities();
   }, []);
+
 
   async function addNewCity(cityName) {
     const newCityData = await getCityWeather(cityName);
     setCityList([...cityList, newCityData]);
   }
 
+  function selectCity(cityName) {
+    console.log('in app: ' + cityName + ' was clicked');
+    setSelectedCity(cityName);
+  }
+
   return (
-    <div className='App'>
-      <Header />
-      <AddCityForm onSubmit={addNewCity} />
-      <CityList cities={cityList} />
-      <br />
-      {cityList.length === 0 ? <p>No details to show ...</p> : <DetailPage city={cityList[0]} />}
-    </div>
+    <Container fluid>
+      <Header formSubmit={addNewCity} />
+      <Row className='py-lg-5' style={{ backgroundColor: '#fff8f0' }}>
+        <Col className='col-lg-6 col-md-8 mx-auto'>
+          {selectedCity ?  <WeatherDetails city={selectedCity}/> : <p>No details to show ...</p>}
+        </Col>
+      </Row>
+      <Row className='py-lg-5 justify-content-center'>
+        <Col>
+          <CardGroup>
+            {cityList.map((city) => (
+              <CityWeather key={city.id} city={city} selectCity={selectCity}  />
+            ))}
+          </CardGroup>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
