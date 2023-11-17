@@ -7,17 +7,15 @@ export default function DetailPage(props) {
       <h1>{city.name} Weather Details</h1>
       <CityWeather {...city} />
       <br />
-      <ol>
-        <li>Current Time?</li>
+      <ul>
         <li>
-          Currently {city.weather.main}: {city.weather.description}
+          Currently: {city.weather[0].main} - {city.weather[0].description}
         </li>
-        <li>Humidity: {city.main.humidty}</li>
+        <li>Humidity: {city.main.humidity}</li>
         <li>Wind: {city.wind.speed}</li>
         <li>Clouds: {city.clouds.all}</li>
         <br />
-        <p>Hour Details: TBD</p>
-      </ol>
+      </ul>
     </>
   );
 }

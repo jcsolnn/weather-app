@@ -4,7 +4,7 @@ import CityList from './components/CityList';
 import AddCityForm from './components/AddCityForm';
 import Header from './components/Header';
 import DetailPage from './components/DetailPage';
-import handleApiRequest from './utils/handleApiRequest';
+import { getCityWeather } from './api/cityWeather';
 
 function App() {
   const [cityList, setCityList] = useState([]);
@@ -12,14 +12,14 @@ function App() {
 
   useEffect(() => {
     const loadDefaultCity = async () => {
-      const defaultData = await handleApiRequest(defaultCity);
+      const defaultData = await getCityWeather(defaultCity);
       setCityList([...cityList, defaultData]);
     };
     loadDefaultCity();
   }, []);
 
   async function addNewCity(cityName) {
-    const newCityData = await handleApiRequest(cityName);
+    const newCityData = await getCityWeather(cityName);
     setCityList([...cityList, newCityData]);
   }
 
