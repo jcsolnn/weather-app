@@ -8,7 +8,7 @@ import CityWeather from './components/CityWeather';
 
 function App() {
   const [cityList, setCityList] = useState([]);
-  //const [selectedCity, setSelectedCity] = useState({});
+  const [selectedCity, setSelectedCity] = useState(null);
   const defaultCities = ['San Francisco', 'Sacramento', 'San Jose'];
 
   useEffect(() => {
@@ -16,19 +16,21 @@ function App() {
       const data1 = await getCityWeather(defaultCities[0]);
       const data2 = await getCityWeather(defaultCities[1]);
       const data3 = await getCityWeather(defaultCities[2]);
-      setCityList([...cityList, data1, data2, data3]);
+      const cityListArr = [data1, data2, data3]
+      setCityList(cityListArr);
     };
     loadDefaultCities();
   }, []);
+
 
   async function addNewCity(cityName) {
     const newCityData = await getCityWeather(cityName);
     setCityList([...cityList, newCityData]);
   }
 
-  function selectCity(city) {
-    console.log('in app: ' + city + ' was clicked');
-    //setSelectedCity(...selectCity);
+  function selectCity(cityName) {
+    console.log('in app: ' + cityName + ' was clicked');
+    setSelectedCity(cityName);
   }
 
   return (
@@ -36,14 +38,14 @@ function App() {
       <Header formSubmit={addNewCity} />
       <Row className='py-lg-5' style={{ backgroundColor: '#fff8f0' }}>
         <Col className='col-lg-6 col-md-8 mx-auto'>
-          {cityList.length === 0 ? <p>No details to show ...</p> : <WeatherDetails city={cityList[0]} />}
+          {selectedCity ?  <WeatherDetails city={selectedCity}/> : <p>No details to show ...</p>}
         </Col>
       </Row>
       <Row className='py-lg-5 justify-content-center'>
         <Col>
           <CardGroup>
             {cityList.map((city) => (
-              <CityWeather key={city.id} onClick={selectCity} {...city} />
+              <CityWeather key={city.id} city={city} selectCity={selectCity}  />
             ))}
           </CardGroup>
         </Col>

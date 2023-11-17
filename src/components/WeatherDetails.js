@@ -1,18 +1,19 @@
 import CityWeather from './CityWeather';
 import { ListGroup, Container } from 'react-bootstrap';
 
-export default function WeatherDetails(props) {
-  const city = props.city;
-
+export default function WeatherDetails({city}) {
   const formatValue = (x) => {
     return Number.parseFloat(x).toFixed(0);
   };
+  console.log(city);
 
   return (
-    <Container>
+    <>{
+      city &&(
+        <Container>
       <ListGroup horizontal>
         <ListGroup.Item style={{ border: 'none' }}>
-          <CityWeather {...city} />
+          <CityWeather city={city} />
         </ListGroup.Item>
         <ListGroup.Item style={{ border: 'none' }}>
           <ListGroup variant='flush'>
@@ -25,5 +26,8 @@ export default function WeatherDetails(props) {
         </ListGroup.Item>
       </ListGroup>
     </Container>
+      )
+    }
+    </>
   );
 }
