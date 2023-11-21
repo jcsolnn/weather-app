@@ -24,7 +24,7 @@ export default function CityWeather({ city, selectCity }) {
   return (
     <>
       <Col>
-        <Card onClick={handleClick} style={{ width: '320px', borderColor: '#f4d06f' }}>
+        <Card onClick={handleClick} style={{ borderColor: '#f4d06f' }}>
           <Card.Body>
             <ListGroup horizontal>
               <ListGroup.Item style={{ border: 'none' }}>

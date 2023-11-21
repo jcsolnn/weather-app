@@ -34,13 +34,15 @@ function App() {
   }
 
   return (
-    <Container fluid>
-      <Header formSubmit={addNewCity} />
-      <Row className='py-lg-5' style={{ backgroundColor: '#fff8f0' }}>
+    <Container>
+      <Row>
+        <Header formSubmit={addNewCity} />
+      </Row>
+      <Row className='py-lg-4' style={{ backgroundColor: '#fff8f0' }}>
         {selectedCity ? <WeatherDetails city={selectedCity} /> : <p>No details to show ...</p>}
       </Row>
-      <Row className='py-lg-5'>
-        <Row md={3} lg={5} classname='g-4'>
+      <Row className='py-lg-4'>
+        <Row classname='g-4' md={4}>
           {cityList.map((city) => (
             <CityWeather key={city.id} city={city} selectCity={selectCity} length={cityList.length} />
           ))}
