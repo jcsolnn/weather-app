@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import { getCityWeather } from './api/cityWeather';
-import { Container, Row, Col, CardGroup } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import WeatherDetails from './components/WeatherDetails';
 import CityWeather from './components/CityWeather';
 
@@ -16,12 +16,12 @@ function App() {
       const data1 = await getCityWeather(defaultCities[0]);
       const data2 = await getCityWeather(defaultCities[1]);
       const data3 = await getCityWeather(defaultCities[2]);
-      const cityListArr = [data1, data2, data3]
-      setCityList(cityListArr);
+      const dataList = [data1, data2, data3];
+      setCityList(dataList);
+      setSelectedCity(dataList[0]);
     };
     loadDefaultCities();
   }, []);
-
 
   async function addNewCity(cityName) {
     const newCityData = await getCityWeather(cityName);
@@ -37,18 +37,14 @@ function App() {
     <Container fluid>
       <Header formSubmit={addNewCity} />
       <Row className='py-lg-5' style={{ backgroundColor: '#fff8f0' }}>
-        <Col className='col-lg-6 col-md-8 mx-auto'>
-          {selectedCity ?  <WeatherDetails city={selectedCity}/> : <p>No details to show ...</p>}
-        </Col>
+        {selectedCity ? <WeatherDetails city={selectedCity} /> : <p>No details to show ...</p>}
       </Row>
-      <Row className='py-lg-5 justify-content-center'>
-        <Col>
-          <CardGroup>
-            {cityList.map((city) => (
-              <CityWeather key={city.id} city={city} selectCity={selectCity}  />
-            ))}
-          </CardGroup>
-        </Col>
+      <Row className='py-lg-5'>
+        <Row md={3} lg={5} classname='g-4'>
+          {cityList.map((city) => (
+            <CityWeather key={city.id} city={city} selectCity={selectCity} length={cityList.length} />
+          ))}
+        </Row>
       </Row>
     </Container>
   );
