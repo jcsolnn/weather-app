@@ -1,5 +1,5 @@
 import { Navbar, Container } from 'react-bootstrap';
-import AddCityForm from './AddCityForm';
+import SearchBar from './SearchBar';
 
 export default function Header({ formSubmit }) {
   return (
@@ -9,7 +9,7 @@ export default function Header({ formSubmit }) {
           Open Weather App
         </Navbar.Brand>
         <div className='float-right'>
-          <AddCityForm onSubmit={formSubmit} />
+          <SearchBar onSubmit={formSubmit} />
         </div>
       </Container>
     </Navbar>

@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import { getCityWeather } from './api/cityWeather';
-import { Container, Row } from 'react-bootstrap';
+import { Alert, Container, Row } from 'react-bootstrap';
 import WeatherDetails from './components/WeatherDetails';
 import CityWeather from './components/CityWeather';
 
@@ -24,8 +24,14 @@ function App() {
   }, []);
 
   async function addNewCity(cityName) {
-    const newCityData = await getCityWeather(cityName);
-    setCityList([...cityList, newCityData]);
+    const data = await getCityWeather(cityName);
+    console.log(data.cod);
+    if (data.cod != 200) {
+      //TODO:
+      console.log('trigger alert/warning ...');
+    } else {
+      setCityList([...cityList, data]);
+    }
   }
 
   function selectCity(cityName) {

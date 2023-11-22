@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
 
-export default function AddCityForm(props) {
+export default function SearchBar({ onSubmit }) {
   const [cityName, setCityName] = useState('');
   async function handleSubmit(event) {
     event.preventDefault();
-    props.onSubmit(cityName);
+    onSubmit(cityName);
     setCityName('');
   }
   return (
@@ -16,7 +16,7 @@ export default function AddCityForm(props) {
             name='cityName'
             type='search'
             placeholder='Enter City'
-            defaultValue={cityName}
+            value={cityName}
             onChange={(event) => setCityName(event.target.value)}
           />
         </Col>
