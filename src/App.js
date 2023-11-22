@@ -41,8 +41,8 @@ function App() {
       <Row className='py-lg-4' style={{ backgroundColor: '#fff8f0' }}>
         {selectedCity ? <WeatherDetails city={selectedCity} /> : <p>No details to show ...</p>}
       </Row>
-      <Row className='py-lg-4'>
-        <Row classname='g-4' md={4}>
+      <Row className='py-lg-2'>
+        <Row className='g-4' md={4}>
           {cityList.map((city) => (
             <CityWeather key={city.id} city={city} selectCity={selectCity} length={cityList.length} />
           ))}
