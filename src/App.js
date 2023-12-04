@@ -4,10 +4,12 @@ import Header from './components/Header';
 import { getCityWeather } from './api/cityWeather';
 import { Alert, Container, Row } from 'react-bootstrap';
 import WeatherDetails from './components/WeatherDetails';
-import CityWeather from './components/CityWeather';
+import Cities from './components/Cities';
+import { CityProvider } from './context/CityContext';
 
 function App() {
   const [cityList, setCityList] = useState([]);
+  // const [cityList, dispatch] = useReducer(cityReducer, initialCityList);
   const [selectedCity, setSelectedCity] = useState(null);
   const defaultCities = ['San Francisco', 'Sacramento', 'San Jose'];
 
@@ -40,21 +42,19 @@ function App() {
   }
 
   return (
-    <Container>
-      <Row>
-        <Header formSubmit={addNewCity} />
-      </Row>
-      <Row className='py-lg-4' style={{ backgroundColor: '#fff8f0' }}>
-        {selectedCity ? <WeatherDetails city={selectedCity} /> : <p>No details to show ...</p>}
-      </Row>
-      <Row className='py-lg-2'>
-        <Row className='g-4' md={4}>
-          {cityList.map((city) => (
-            <CityWeather key={city.id} city={city} selectCity={selectCity} length={cityList.length} />
-          ))}
+    <CityProvider cities={cityList}>
+      <Container>
+        <Row>
+          <Header formSubmit={addNewCity} />
         </Row>
-      </Row>
-    </Container>
+        <Row className='py-lg-4' style={{ backgroundColor: '#fff8f0' }}>
+          {selectedCity ? <WeatherDetails city={selectedCity} /> : <p>No details to show ...</p>}
+        </Row>
+        <Row className='py-lg-2'>
+          <Cities selectCity={cityList} />
+        </Row>
+      </Container>
+    </CityProvider>
   );
 }
 
