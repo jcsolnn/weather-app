@@ -11,6 +11,7 @@ export default function CityWeather({ city, selectCity }) {
       let weather_icon = IMG_URL + city.weather[0].icon + '@2x.png';
       setIcon(weather_icon);
     }
+    // eslint-disable-next-line
   }, [city]);
 
   function handleClick() {
