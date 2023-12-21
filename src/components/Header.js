@@ -1,7 +1,7 @@
 import { Navbar, Container } from 'react-bootstrap';
 import SearchBar from './SearchBar';
 
-export default function Header({ formSubmit }) {
+export default function Header() {
   return (
     <Navbar style={{ background: '#a7dcd6' }}>
       <Container fluid>
@@ -9,7 +9,7 @@ export default function Header({ formSubmit }) {
           Open Weather App
         </Navbar.Brand>
         <div className='float-right'>
-          <SearchBar onSubmit={formSubmit} />
+          <SearchBar />
         </div>
       </Container>
     </Navbar>

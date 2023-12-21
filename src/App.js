@@ -27,18 +27,7 @@ function App() {
     loadDefaultCities();
     // eslint-disable-next-line
   }, []);
-  /*
-  async function addNewCity(cityName) {
-    const data = await getCityWeather(cityName);
-    console.log(data.cod);
-    if (data.cod !== 200) {
-      //TODO:
-      console.log('trigger alert/warning ...');
-    } else {
-      setCityList([...cityList, data]);
-    }
-  }
-*/
+
   function selectCity(cityName) {
     console.log('in app: ' + cityName + ' was clicked');
     setSelectedCity(cityName);
