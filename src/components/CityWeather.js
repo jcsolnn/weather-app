@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { Card, ListGroup, Col } from 'react-bootstrap';
 import { formatFloatValue, formatCurrentDateTime } from '../utils/utils';
+import { CityContext } from '../context/CityContext';
 
-export default function CityWeather({ city, selectCity }) {
+export default function CityWeather({ city }) {
+  const { dispatch } = useContext(CityContext);
   const [icon, setIcon] = useState(null);
   const IMG_URL = process.env.REACT_APP_API_ICON_URL;
 
@@ -15,7 +17,7 @@ export default function CityWeather({ city, selectCity }) {
   }, [city]);
 
   function handleClick() {
-    selectCity(city);
+    dispatch({ type: 'selectedCity', selectedCity: city });
   }
 
   return (

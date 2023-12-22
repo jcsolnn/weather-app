@@ -11,7 +11,7 @@ export default function SearchBar() {
     event.preventDefault();
     try {
       const city = await getCityWeather(cityName);
-      dispatch({ type: 'add', payload: city });
+      dispatch({ type: 'add', city: city });
       setCityName('');
     } catch (err) {
       //TODO: handle 404 if city not found
