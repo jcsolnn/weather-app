@@ -16,14 +16,17 @@ export default function CityWeather({ city }) {
     // eslint-disable-next-line
   }, [city]);
 
-  function handleClick() {
+  function handleDetails() {
     dispatch({ type: 'selectedCity', selectedCity: city });
   }
 
+  function handleRemove() {
+    dispatch({ type: 'remove', id: city.id });
+  }
   return (
     <>
       <Col>
-        <Card onClick={handleClick} style={{ borderColor: '#f4d06f' }}>
+        <Card style={{ borderColor: '#f4d06f' }}>
           <Card.Body>
             <ListGroup horizontal>
               <ListGroup.Item style={{ border: 'none' }}>
@@ -42,6 +45,10 @@ export default function CityWeather({ city }) {
               </ListGroup.Item>
               <ListGroup.Item>
                 <b>{city.weather[0].main}</b> - {city.weather[0].description}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <button onClick={handleDetails}>...Details</button>
+                <button onClick={handleRemove}>Remove</button>
               </ListGroup.Item>
             </ListGroup>
           </Card.Body>

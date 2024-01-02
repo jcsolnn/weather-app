@@ -20,7 +20,6 @@ function CityProvider({ children }) {
       const data2 = await getCityWeather(defaultCities[1]);
       const data3 = await getCityWeather(defaultCities[2]);
       dispatch({ type: 'fetch', cities: [data1, data2, data3] });
-      dispatch({ type: 'selectedCity', selectedCity: data1 });
     };
     loadDefaultCities();
     // eslint-disable-next-line

@@ -11,19 +11,29 @@ const initialState = {
 export default function cityReducer(state, action) {
   switch (action.type) {
     case 'fetch': {
-      // return [...state, action.payload]; //this nests payload within state if just an []
-      // return [...state.cities, ...action.cities]; //replaces state if just an arr
-      //since state is an obj, need to shallow copy cities
-      return { ...state, cities: [...state.cities, ...action.cities] };
+      //don't need to copy initial state since we're initilizing it
+      return { cities: action.cities, selectedCity: action.cities[0] };
     }
     case 'add': {
       const cityInList = state.cities.find((i) => i.id === action.city.id);
+      if (state.cities.length === 0) {
+        return { cities: [action.city], selectedCity: action.city };
+      }
       if (!cityInList) {
-        return { state, cities: [...state.cities, action.city] }; //add new city
+        //...state - copy other fields
+        //...state.cities - copy prev then add new obj (action.city)
+        return { ...state, cities: [...state.cities, action.city] };
       }
     }
     case 'selectedCity': {
       return { ...state, selectedCity: action.selectedCity };
+    }
+    case 'remove': {
+      const newList = state.cities.filter((c) => c.id !== action.id);
+      if (state.selectedCity.id === action.id) {
+        return { cities: newList, selectedCity: newList[0] };
+      }
+      return { ...state, cities: newList };
     }
 
     default:
