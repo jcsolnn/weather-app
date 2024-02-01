@@ -35,7 +35,12 @@ export default function cityReducer(state, action) {
       }
       return { ...state, cities: newList };
     }
-
+    case 'error': {
+      return { ...state, error: action.error };
+    }
+    case 'dismiss_error': {
+      return { ...state, error: '' };
+    }
     default:
       throw new Error('Unhandled action' + action.type);
   }

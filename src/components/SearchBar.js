@@ -9,16 +9,15 @@ export default function SearchBar() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    try {
-      const city = await getCityWeather(cityName);
-      dispatch({ type: 'add', city: city });
-      setCityName('');
-    } catch (err) {
-      //TODO: handle 404 if city not found
-      //if(city.cod === 404)
-      console.log(err);
+    const response = await getCityWeather(cityName);
+    if (response.statusCode === 200) {
+      dispatch({ type: 'add', city: response.content });
+    } else {
+      dispatch({ type: 'error', error: response.content });
     }
+    setCityName('');
   }
+
   return (
     <Form className='d-flex' onSubmit={handleSubmit}>
       <Row>

@@ -4,6 +4,7 @@ export async function getCityWeather(cityName) {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const WEATHER_BASE_URL = process.env.REACT_APP_API_URL;
   const UNIT = 'imperial';
+
   try {
     const response = await axios.get(WEATHER_BASE_URL, {
       params: {
@@ -12,15 +13,14 @@ export async function getCityWeather(cityName) {
         appid: API_KEY,
       },
     });
-    return response.data;
+    return { statusCode: response.status, content: response.data };
   } catch (err) {
+    return { statusCode: err.response.data.cod, content: err.response.data.message };
+    /*
     if (err.response) {
-      if (err.response.status === 404) {
-        return err.response.data;
-      }
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
-      console.log(err.response.data); //{cod:404,message:'city not fount'}
+      console.log(err.response.data); //{cod:404,message:'city not found'}
       console.log(err.response.status); //404
       //console.log(err.response.headers);
     } else if (err.request) {
@@ -31,6 +31,6 @@ export async function getCityWeather(cityName) {
     } else {
       // Something happened in setting up the request that triggered an err
       console.log('err', err.message);
-    }
+    }*/
   }
 }
