@@ -1,7 +1,7 @@
-import CityWeather from './CityWeather';
 import { Row } from 'react-bootstrap';
 import { useContext } from 'react';
 import { CityContext } from '../context/CityContext';
+import CurrentWeather from './CurrentWeather';
 
 export default function Cities() {
   const { cities } = useContext(CityContext);
@@ -9,7 +9,7 @@ export default function Cities() {
   return (
     <Row className='g-4' md={4}>
       {cities.map((city) => (
-        <CityWeather key={city.id} city={city} />
+        <CurrentWeather key={city.id} city={city} />
       ))}
     </Row>
   );

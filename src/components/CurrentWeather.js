@@ -1,9 +1,9 @@
 import { useEffect, useContext, useState } from 'react';
-import { Card, ListGroup, Col } from 'react-bootstrap';
+import { Card, ListGroup, Col, Badge } from 'react-bootstrap';
 import { formatFloatValue, formatCurrentDateTime } from '../utils/utils';
 import { CityContext } from '../context/CityContext';
 
-export default function CityWeather({ city }) {
+export default function CurrentWeather({ city }) {
   const { dispatch } = useContext(CityContext);
   const [icon, setIcon] = useState(null);
   const IMG_URL = process.env.REACT_APP_API_ICON_URL;
@@ -16,7 +16,7 @@ export default function CityWeather({ city }) {
     // eslint-disable-next-line
   }, [city]);
 
-  function handleDetails() {
+  function handleClick() {
     dispatch({ type: 'selectedCity', selectedCity: city });
   }
 
@@ -28,7 +28,7 @@ export default function CityWeather({ city }) {
       <Col>
         <Card style={{ borderColor: '#f4d06f' }}>
           <Card.Body>
-            <ListGroup horizontal>
+            <ListGroup horizontal onClick={handleClick}>
               <ListGroup.Item style={{ border: 'none' }}>
                 <Card.Title style={{ fontSize: '2rem' }}>{formatFloatValue(city.main.temp)}&deg; </Card.Title>
                 <Card.Subtitle>{city.name}</Card.Subtitle>
@@ -46,9 +46,10 @@ export default function CityWeather({ city }) {
               <ListGroup.Item>
                 <b>{city.weather[0].main}</b> - {city.weather[0].description}
               </ListGroup.Item>
-              <ListGroup.Item>
-                <button onClick={handleDetails}>...Details</button>
-                <button onClick={handleRemove}>Remove</button>
+              <ListGroup.Item className='d-flex justify-content-end'>
+                <Badge bg='secondary' onClick={handleRemove} pill>
+                  -
+                </Badge>
               </ListGroup.Item>
             </ListGroup>
           </Card.Body>
