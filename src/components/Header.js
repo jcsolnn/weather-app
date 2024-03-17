@@ -5,7 +5,7 @@ import { CityContext } from '../context/CityContext';
 
 export default function Header() {
   const { error, dispatch } = useContext(CityContext);
-  const OPENWEATHER_URL = 'https://openweathermap.org/api';
+  const OPEN_WEATHER_URL = 'https://openweathermap.org/api';
 
   function handleAlert() {
     dispatch({ type: 'dismiss_error' });
@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <Navbar style={{ background: '#a7dcd6' }}>
       <Container fluid>
-        <Navbar.Brand href='OPENWEATHER_URL' target='_blank' style={{ color: '#221c35' }}>
+        <Navbar.Brand href={OPEN_WEATHER_URL} target='_blank' style={{ color: '#221c35' }}>
           Open Weather App
         </Navbar.Brand>
         {error ? (
